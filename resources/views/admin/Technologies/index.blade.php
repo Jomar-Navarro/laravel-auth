@@ -1,35 +1,73 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h2 class="fw-bold">Tehcnologies</h2>
+    <h2 class="fw-bold">Technologies</h2>
+
+    @if ($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="container-fluid mb-4">
+        <form class="d-flex" action="{{ route('admin.technologies.store') }}" method="POST">
+            @csrf
+            <input class="form-control me-2" type="text" placeholder="New Technology" name="name">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
 
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Technologies</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
+            @foreach ($technologies as $technology)
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>
+                    <form action="{{ route('admin.technologies.update', $technology) }}" id="form-edit-{{ $technology->id }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <input type="text" value="{{ $technology->name }}" name="name" class="form-control">
+                    </form>
+                </td>
+                <td>
+                    <button onclick="submitForm({{ $technology->id }})" class="btn btn-warning"><i class="fa-solid fa-pen-nib"></i></button>
+
+                    <form action="{{ route('admin.technologies.destroy', $technology) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this technology?')" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+                    </form>
+                </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
+            @endforeach
         </tbody>
     </table>
-    @endsection
+
+    <script>
+        function submitForm(id) {
+            const form = document.getElementById(`form-edit-${id}`);
+            form.submit();
+        }
+    </script>
+@endsection

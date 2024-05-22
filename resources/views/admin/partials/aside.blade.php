@@ -4,7 +4,7 @@
             <div>
                 <li>
                     <a href="#">
-                        <i class="fa-solid fa-list-check"></i>
+                        <i class="fa-solid fa-database"></i>
                         <span>Projects</span>
                     </a>
                 </li>
