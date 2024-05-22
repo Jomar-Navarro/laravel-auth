@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Functions\Helper as Help;
-use App\Models\Types;
+use App\Models\Type;
 
 class TypesTableSeeder extends Seeder
 {
@@ -16,9 +16,9 @@ class TypesTableSeeder extends Seeder
     {
         $data = ['Front End', 'Back End', 'Design'];
         foreach($data as $item){
-            $new_item = new Types();
+            $new_item = new Type();
             $new_item->name = $item;
-            $new_item->slug = Help::generateSlug($item, Types::class);
+            $new_item->slug = Help::generateSlug($item, Type::class);
 
             $new_item->save();
         }

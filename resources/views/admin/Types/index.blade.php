@@ -26,7 +26,7 @@
     @endif
 
     <div class="container-fluid mb-4">
-        <form class="d-flex" action="{{ route('admin.technologies.store') }}" method="POST">
+        <form class="d-flex" action="{{ route('admin.Types.store') }}" method="POST">
             @csrf
             <input class="form-control me-2" type="text" placeholder="New Technology" name="name">
             <button class="btn btn-success" type="submit">Submit</button>
@@ -44,7 +44,7 @@
             @foreach ($technologies as $technology)
             <tr>
                 <td>
-                    <form action="{{ route('admin.technologies.update', $technology) }}" id="form-edit-{{ $technology->id }}" method="POST">
+                    <form action="{{ route('admin.Types.update', $technology) }}" id="form-edit-{{ $technology->id }}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="text" value="{{ $technology->name }}" name="name" class="form-control">
@@ -55,7 +55,7 @@
                     <button onclick="submitForm({{ $technology->id }})" class="btn btn-warning"><i class="fa-solid fa-pen-nib"></i></button>
 
                     <form
-                        action="{{ route('admin.technologies.destroy', $technology) }}"
+                        action="{{ route('admin.Types.destroy', $technology) }}"
                         method="POST"
                         onsubmit="return confirm('Are you sure you want to delete this technology?')"
                         class="d-inline">

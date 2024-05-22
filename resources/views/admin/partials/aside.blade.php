@@ -25,7 +25,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.Types.index') }}">
                         <i class="fa-solid fa-keyboard"></i>
                         <span>Type</span>
                     </a>
