@@ -3,7 +3,7 @@
         <ul class="d-flex flex-column align-items-start mt-3">
             <div>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.projects.index') }}">
                         <i class="fa-solid fa-database"></i>
                         <span>Projects</span>
                     </a>
@@ -17,7 +17,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ Route('admin.technologies.index') }}">
+                    <a href="#">
                         <i class="fa-solid fa-microchip"></i>
                         <span>Technologies</span>
 
@@ -25,7 +25,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.Types.index') }}">
+                    <a href="#">
                         <i class="fa-solid fa-keyboard"></i>
                         <span>Type</span>
                     </a>
