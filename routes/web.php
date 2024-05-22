@@ -4,9 +4,6 @@ use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\ProjectController;
-use App\Http\Controllers\Admin\TechlogieController;
-use App\Http\Controllers\Admin\TypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +24,7 @@ Route::middleware(['auth', 'verified'])
                 ->group(function(){
                     // Qua le route della CRUD protette da auth
                     Route::get('/', [DashboardController::class, 'index'])->name('home');
-                    Route::resource('projects', ProjectController::class);
-                    Route::resource('technologies', TechlogieController::class);
-                    Route::resource('Types', TypeController::class);
+
                 });
 
 Route::middleware('auth')->group(function () {
