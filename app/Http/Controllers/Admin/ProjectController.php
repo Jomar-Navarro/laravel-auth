@@ -65,16 +65,44 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $val_data = $request->validate([
+            'title' => 'required|min:2|max:20',
+            // 'description' => 'required',
+            // 'project_url' => 'required|url',
+            // 'completion_date' => 'required|date',
+        ],
+        [
+            'title.required' => 'Name of the project is required.',
+            'title.min' => 'The project name should have at least 2 characters.',
+            'title.max' => 'The project name should have a maximum of 20 characters.',
+            // 'description.required' => 'Description is required.',
+            // 'project_url.required' => 'Project URL is required.',
+            // 'project_url.url' => 'Project URL should be a valid URL.',
+            // 'completion_date.required' => 'Completion date is required.',
+            // 'completion_date.date' => 'Completion date should be a valid date.',
+        ]);
+
+        $exist = Project::where('title', $request->title)->first();
+        if ($exist) {
+            return redirect()->route('admin.projects.index')->with('error', 'Project already exist!');
+        }else {
+            $val_data['slug'] = Help::generateSlug($request->title, Project::class);
+            $project->update($val_data);
+
+            return redirect()->route('admin.projects.index')->with('success', 'Project modified successfully!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+            return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully!');
+
     }
 }

@@ -17,7 +17,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.technologies.index') }}">
                         <i class="fa-solid fa-microchip"></i>
                         <span>Technologies</span>
 
@@ -25,7 +25,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.types.index') }}">
                         <i class="fa-solid fa-keyboard"></i>
                         <span>Type</span>
                     </a>
