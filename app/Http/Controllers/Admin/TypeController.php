@@ -65,7 +65,7 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Type $project)
+    public function update(Request $request, Type $type)
     {
         $val_data = $request->validate([
             'title' => 'required|min:2|max:20',
@@ -81,7 +81,7 @@ class TypeController extends Controller
             return redirect()->route('admin.types.index')->with('error', 'Type already exist!');
         }else {
             $val_data['slug'] = Help::generateSlug($request->title, Type::class);
-            $project->update($val_data);
+            $type->update($val_data);
 
             return redirect()->route('admin.types.index')->with('success', 'Type modified successfully!');
         }
@@ -90,9 +90,9 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Type $project)
+    public function destroy(Type $type)
     {
-        $project->delete();
+        $type->delete();
 
             return redirect()->route('admin.types.index')->with('success', 'Project deleted successfully!');
 
