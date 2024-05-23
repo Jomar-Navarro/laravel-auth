@@ -65,15 +65,17 @@ class TechnologyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Technology $technologies)
+    public function update(Request $request, Technology $technology)
     {
+
+        // dd($request->all());
         $val_data = $request->validate([
-            'name' => 'required|min:2|max:20',
+            'title' => 'required|min:2|max:20',
         ],
         [
-            'name.required' => 'Name of the project is required.',
-            'name.min' => 'The Technology name should have at least 2 characters.',
-            'name.max' => 'The Technology name should have a maximum of 20 characters.',
+            'title.required' => 'Name of the project is required.',
+            'title.min' => 'The Technology name should have at least 2 characters.',
+            'title.max' => 'The Technology name should have a maximum of 20 characters.',
         ]);
 
         $exist = Technology::where('title', $request->title)->first();
@@ -81,7 +83,7 @@ class TechnologyController extends Controller
             return redirect()->route('admin.technologies.index')->with('error', 'Technology already exist!');
         }else {
             $val_data['slug'] = Help::generateSlug($request->title, Technology::class);
-            $technologies->update($val_data);
+            $technology->update($val_data);
 
             return redirect()->route('admin.technologies.index')->with('success', 'Technology modified successfully!');
         }
@@ -90,9 +92,9 @@ class TechnologyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Technology $technologies)
+    public function destroy(Technology $technology)
     {
-        $technologies->delete();
+        $technology->delete();
 
             return redirect()->route('admin.technologies.index')->with('success', 'Technology deleted successfully!');
 
