@@ -17,7 +17,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.projects.create') }}">
                         <i class="fa-solid fa-square-plus"></i>
                         <span>Add New Project</span>
                     </a>

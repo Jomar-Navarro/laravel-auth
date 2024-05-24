@@ -6,10 +6,13 @@ header {
 
 .main-wrapper {
     height: calc(100vh - 70px);
+    .content {
+        width: 100%;
+    }
 }
 
 aside {
-    width: 10%;
+    width: 12%;
     ul {
         list-style: none;
         li {

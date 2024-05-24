@@ -19,6 +19,7 @@ class ProjectTableSeeder extends Seeder
                 'title' => 'Project 1',
                 'description' => 'Description of Project 1',
                 'project_url' => 'https://github.com/Jomar-Navarro/vue-boolzapp',
+                'image' => 'img/public/img/imagenotfound.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -26,6 +27,7 @@ class ProjectTableSeeder extends Seeder
                 'title' => 'Project 2',
                 'description' => 'Description of Project 2',
                 'project_url' => 'https://github.com/Jomar-Navarro/laravel-auth',
+                'image' => 'img/public/img/imagenotfound.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
@@ -37,6 +39,7 @@ class ProjectTableSeeder extends Seeder
             $new_item->slug = Help::generateSlug($item['title'], Project::class);
             $new_item->description = $item['description'];
             $new_item->project_url = $item['project_url'];
+            $new_item->image = $item['image'] ?: 'img/public/img/imagenotfound.jpg';
             $new_item->created_at = $item['created_at'];
             $new_item->updated_at = $item['updated_at'];
 

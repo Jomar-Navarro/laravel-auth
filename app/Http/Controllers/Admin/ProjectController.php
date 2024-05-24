@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Functions\Helper as Help;
-
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::orderBy('id', 'desc')->paginate(15);
 
         return view('admin.Projects.index', compact('projects'));
     }
@@ -25,33 +25,32 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.Projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        $exist = Project::where('title', $request->title)->first();
-        if ($exist) {
-            return redirect()->route('admin.projects.index')->with('error', 'Project already exist!');
-        }else {
-            $new = new Project();
-            $new->title = $request->title;
-            $new->slug = Help::generateSlug($new->title, Project::class);
-            $new->save();
+        $form_data = $request->all();
+        $form_data['slug'] = Help::generateSlug($form_data['title'], Project::class);
 
-            return redirect()->route('admin.projects.index')->with('success', 'Project added successfully!');
-        }
+        $new = new Project();
+        $new->fill($form_data);
+        $new->save();
+
+        return redirect()->route('admin.projects.show', $new);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        dd($project);
+
+
     }
 
     /**
